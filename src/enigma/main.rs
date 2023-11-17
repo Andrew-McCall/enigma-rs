@@ -1,4 +1,8 @@
+use enigma_converts::ToEnigmaInt;
+
 mod enigma_converts;
+mod enigma_encode;
+mod rotor_encode;
 
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
@@ -38,38 +42,15 @@ fn main() {
                 panic!("Missing argument for message.\n --message \"MESSAGE\"");
             }
 
-            let remaining_args = &args[(i + 1)..];
-
-            let input = remaining_args.join(" ");
-            let mut first_quote = None;
-            let mut last_quote = None;
-            input.char_indices().for_each(|c| {
-                if c.1 == '"' {
-                    if first_quote.is_none() {
-                        first_quote = Some(c.0);
-                    } else {
-                        last_quote = Some(c.0);
-                    }
-                }
-            });
-
-            if first_quote.is_none() && last_quote.is_none() {
-                message = Some(args[i + 1].clone());
-                i += 1;
-            } else if first_quote.is_none() && last_quote.is_none() {
-                message = Some(input[(first_quote.unwrap() + 1)..last_quote.unwrap()].to_string());
-                i += 1;
-            } else {
-                panic!("Invalid message format. Must be --message \"MESSAGE TEXT\"");
-            }
+            message = Some(args[i + 1].to_string());
+            i += 1
         }
 
         i += 1;
     }
-
-    println!("Rotors: {:?}", rotors);
-
+    rotors.reverse();
     let enigma = Enigma { rotors };
+    println!("Encoded: {}", enigma.encode(&message.unwrap()));
 }
 
 fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Result<Rotor, String> {
@@ -86,10 +67,13 @@ fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Resu
         return Err("Position must be 1 character.".to_string());
     }
 
-    let wiring = encoding.chars().collect::<Vec<char>>();
+    let wiring = encoding
+        .chars()
+        .map(|c| c.to_internal_int())
+        .collect::<Vec<usize>>();
 
     // Validate turnover
-    let turnover = turnover.chars().next().unwrap();
+    let turnover = turnover.chars().next().unwrap().to_internal_int();
 
     let turnover_index = match wiring.iter().position(|&c| c == turnover) {
         Some(i) => i,
@@ -97,7 +81,7 @@ fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Resu
     };
 
     // Validate position
-    let position = position.chars().next().unwrap();
+    let position = position.chars().next().unwrap().to_internal_int();
 
     let position_index = match wiring.iter().position(|&c| c == position) {
         Some(i) => i,
@@ -113,7 +97,7 @@ fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Resu
 
 #[derive(Debug)]
 struct Rotor {
-    wiring: Vec<char>,
+    wiring: Vec<usize>,
     turnover: usize,
     position: usize,
 }
