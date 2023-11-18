@@ -4,7 +4,7 @@ use crate::{
 };
 
 impl Enigma {
-    pub fn encode(mut self, message: &String) -> String {
+    pub fn encode(&mut self, message: &String) -> String {
         let mut output = String::new();
 
         for c in message.chars() {

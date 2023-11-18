@@ -23,6 +23,7 @@ fn main() {
     let mut plugboard = None;
 
     let mut message = None;
+    let mut print_state = false;
 
     let mut i = 1;
     while i < args.len() {
@@ -65,8 +66,10 @@ fn main() {
 
             plugboard = Some(Plugboard::from_args(&args[i + 1]));
         } else if current_argument == "--help" || current_argument == "-h" {
-            println!("Andrew McCall's Enigma Machine (HELP)\n\n--help (-h) | Shows all options\n--message (-m) | Sets the message to encode | --message \"PLAINTEXT MESSAGE\"\n--rotor (-r) | Adds a rotor | --rotor ENCODING TURNOVER POSITION\n--reflector (-rf) | Sets the reflector | --reflector \"PAIRS\"\n--plugboard (-pb) | Sets the plugboard | --plugboard \"PAIRS\"\n\nPAIRS is a list of letter pairs. For example, \"AB CD EF\" would map A to B, C to D, and E to F and vice versa.\nENCODING is a representation of the rotor's internal shifting. For example, \"DMTWSILRUYQNKFEJCAZBPGXOHV\" would cause A to become D and B to become M after passing through the rotor.\nTURNOVER is a letter of the rotor which when reached will cause the next rotor (left to right) to increment once. e.g \"A\".\nPOSITION is the current position of the rotor. This is based of it's encoding. For example, K would represent the rotor being one position forward if the example encoding is being used.\n\nEXAMPLE USAGE: ./enigma --rotor \"EKMFLGDQVZNTOWYHXUSPAIBRCJ\" V A --rotor \"AJDKSIRUXBLHWTMCQGZNPYFVOE\" E A --rotor \"BDFHJLCPRTXVZNYEIWGAKMUSQO\" Q A --reflector \"YR UH QS LD PX NG OK MI EB FZ CW VJ AT\" --message \"JDPEN XCJJO\"\nOUTPUT: \"HELLO WORLD\"");
+            println!("Andrew McCall's Enigma Machine (HELP)\n\n--help (-h) | Shows all options\n--message (-m) | Sets the message to encode | --message \"PLAINTEXT MESSAGE\"\n--rotor (-r) | Adds a rotor | --rotor ENCODING TURNOVER POSITION\n--reflector (-rf) | Sets the reflector | --reflector \"PAIRS\"\n--plugboard (-pb) | Sets the plugboard | --plugboard \"PAIRS\"\n--state (-s) | Prints the state of the rotors after encoding the message\n\nPAIRS is a list of letter pairs. For example, \"AB CD EF\" would map A to B, C to D, and E to F and vice versa.\nENCODING is a representation of the rotor's internal shifting. For example, \"DMTWSILRUYQNKFEJCAZBPGXOHV\" would cause A to become D and B to become M after passing through the rotor.\nTURNOVER is a letter of the rotor which when reached will cause the next rotor (left to right) to increment once. e.g \"A\".\nPOSITION is the current position of the rotor. This is based of it's encoding. For example, K would represent the rotor being one position forward if the example encoding is being used.\n\nEXAMPLE USAGE: ./enigma --rotor \"EKMFLGDQVZNTOWYHXUSPAIBRCJ\" V A --rotor \"AJDKSIRUXBLHWTMCQGZNPYFVOE\" E A --rotor \"BDFHJLCPRTXVZNYEIWGAKMUSQO\" Q A --reflector \"YR UH QS LD PX NG OK MI EB FZ CW VJ AT\" --message \"JDPEN XCJJO\"\nOUTPUT: \"HELLO WORLD\"");
             return;
+        } else if current_argument == "--state" || current_argument == "-s" {
+            print_state = true;
         } else {
             panic!("Unknown argument: {}", current_argument);
         }
@@ -87,11 +90,19 @@ fn main() {
     }
     let reflector = reflector.unwrap();
 
-    let enigma = Enigma {
+    let mut enigma = Enigma {
         rotors,
         reflector,
         plugboard,
     };
 
-    println!("{}", enigma.encode(&message.unwrap()));
+    let output = enigma.encode(&message.unwrap());
+
+    println!("OUTPUT: {}", output);
+
+    if print_state {
+        for rotor in &enigma.rotors {
+            print!("{}", rotor.get_position());
+        }
+    }
 }
