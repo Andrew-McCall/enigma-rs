@@ -55,11 +55,7 @@ fn main() {
                 panic!("Missing argument for reflector.\n --reflector \"PAIRS\"");
             }
 
-            if args[i + 1].to_uppercase() == "DEFAULT" {
-                reflector = Some(Reflector::default());
-            } else {
-                reflector = Some(Reflector::from_args(&args[i + 1]));
-            }
+            reflector = Some(Reflector::from_args(&args[i + 1]));
 
             i += 1;
         } else if current_argument == "--plugboard" || current_argument == "-pb" {
