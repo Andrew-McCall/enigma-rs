@@ -2,6 +2,7 @@ impl super::ToEnigmaInt<char, usize> for char {
     /// This mimics turning a key press into an internal wire - which the rotors/plugboard will cipher
     fn to_internal_int(self) -> usize {
         // Ugly but efficient
+        // Can use .to_ascii as usize - 65 to get the same result
         match self {
             'A' | 'a' => 0,
             'B' | 'b' => 1,
