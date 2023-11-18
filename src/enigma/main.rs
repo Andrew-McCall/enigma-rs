@@ -11,8 +11,6 @@ mod rotor;
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
 
-    let mut decode = false;
-
     let mut rotors = Vec::new();
 
     let mut message = None;
@@ -48,17 +46,13 @@ fn main() {
 
             message = Some(args[i + 1].to_string());
             i += 1
-        } else if current_argument == "-d" || current_argument == "--decode" {
-            decode = true;
         } else {
             panic!("Unknown argument: {}", current_argument);
         }
 
         i += 1;
     }
-    if !decode {
-        rotors.reverse();
-    }
+
     let enigma = Enigma {
         rotors,
         reflector: Reflector::default(),
