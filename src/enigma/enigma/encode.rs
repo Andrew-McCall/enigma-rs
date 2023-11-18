@@ -15,6 +15,10 @@ impl Enigma {
 
             let mut internal_int = c.to_internal_int();
 
+            if self.plugboard.is_some() {
+                internal_int = self.plugboard.as_ref().unwrap().reflect(internal_int);
+            }
+
             let mut turn_next = true;
             for rotor in self.rotors.iter_mut().enumerate() {
                 if turn_next {

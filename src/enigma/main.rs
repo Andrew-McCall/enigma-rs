@@ -2,6 +2,8 @@ use enigma::Enigma;
 use reflector::Reflector;
 use rotor::Rotor;
 
+use crate::plugboard::Plugboard;
+
 mod enigma;
 mod enigma_int;
 mod plugboard;
@@ -17,8 +19,8 @@ fn main() {
     }
 
     let mut rotors = Vec::new();
-
     let mut reflector = None;
+    let mut plugboard = None;
 
     let mut message = None;
 
@@ -60,6 +62,12 @@ fn main() {
             }
 
             i += 1;
+        } else if current_argument == "--plugboard" || current_argument == "-pb" {
+            if i + 1 >= args.len() {
+                panic!("Missing argument for plugboard.\n --plugboard \"PAIRS\"");
+            }
+
+            plugboard = Some(Plugboard::from_args(&args[i + 1]));
         } else {
             panic!("Unknown argument: {}", current_argument);
         }
@@ -83,7 +91,7 @@ fn main() {
     let enigma = Enigma {
         rotors,
         reflector,
-        plugboard: None,
+        plugboard,
     };
 
     println!("{}", enigma.encode(&message.unwrap()));
