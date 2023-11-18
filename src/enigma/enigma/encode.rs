@@ -25,7 +25,7 @@ impl Enigma {
                     let turnover = rotor.1.turnover;
 
                     if position == turnover {
-                        //turn_next = true;
+                        turn_next = true;
                     }
                 }
 
