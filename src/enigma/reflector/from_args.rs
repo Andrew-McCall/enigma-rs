@@ -6,7 +6,7 @@ impl Reflector {
     pub fn from_args(argument: &String) -> Reflector {
         let pairs = argument.split_whitespace();
         if pairs.clone().count() != 13 {
-            panic!("Reflector must have 13 pairs of letters.\n --reflector \"PAIRS\"\n --reflector \"AB CD EF GH IJ KL MN OP QR ST UV WX YZ\"");
+            panic!("Reflector must have 13 pairs of letters.\n --reflector \"PAIRS\"");
         }
 
         let mut wiring = [0; 26];
