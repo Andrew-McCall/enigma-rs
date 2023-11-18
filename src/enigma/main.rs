@@ -13,8 +13,8 @@ mod rotor;
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
 
-    if args.len() == 1 {
-        println!("Usage: enigma --rotor ENCODING TURNOVER POSITION --message \"MESSAGE\"");
+    if args.len() <= 1 {
+        println!("Missing arguments. Use --help for more information.");
         return;
     }
 
