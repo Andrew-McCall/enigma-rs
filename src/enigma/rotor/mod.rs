@@ -1,5 +1,6 @@
 mod decode;
 mod encode;
+mod from_args;
 mod turn;
 
 pub struct Rotor {
