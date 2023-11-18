@@ -5,6 +5,7 @@ use rotor::Rotor;
 
 mod enigma;
 mod enigma_int;
+mod plugboard;
 mod reflector;
 mod rotor;
 
@@ -85,7 +86,11 @@ fn main() {
     }
     let reflector = reflector.unwrap();
 
-    let enigma = Enigma { rotors, reflector };
+    let enigma = Enigma {
+        rotors,
+        reflector,
+        plugboard: None,
+    };
 
     println!("{}", enigma.encode(&message.unwrap()));
 }
