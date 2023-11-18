@@ -1,6 +1,7 @@
 mod default;
+mod from_args;
 mod reflect;
 
 pub struct Reflector {
-    pub wiring: Vec<usize>,
+    pub wiring: [usize; 26],
 }

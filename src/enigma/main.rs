@@ -18,6 +18,8 @@ fn main() {
 
     let mut rotors = Vec::new();
 
+    let mut reflector = None;
+
     let mut message = None;
 
     let mut i = 1;
@@ -51,6 +53,18 @@ fn main() {
 
             message = Some(args[i + 1].to_string());
             i += 1
+        } else if current_argument == "--reflector" || current_argument == "-rf" {
+            if i + 1 >= args.len() {
+                panic!("Missing argument for reflector.\n --reflector \"PAIRS\"");
+            }
+
+            if args[i + 1].to_uppercase() == "DEFAULT" {
+                reflector = Some(Reflector::default());
+            } else {
+                reflector = Some(Reflector::from_args(&args[i + 1]));
+            }
+
+            i += 1;
         } else {
             panic!("Unknown argument: {}", current_argument);
         }
@@ -66,12 +80,14 @@ fn main() {
         panic!("No message specified.\n --message \"MESSAGE\"");
     }
 
-    let enigma = Enigma {
-        rotors,
-        reflector: Reflector::default(),
-    };
+    if reflector.is_none() {
+        panic!("No reflector specified.\n --reflector \"PAIRS\"")
+    }
+    let reflector = reflector.unwrap();
 
-    println!("Encoded: {}", enigma.encode(&message.unwrap()));
+    let enigma = Enigma { rotors, reflector };
+
+    println!("{}", enigma.encode(&message.unwrap()));
 }
 
 fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Result<Rotor, String> {
