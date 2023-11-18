@@ -53,10 +53,19 @@ fn main() {
         i += 1;
     }
 
+    if rotors.len() == 0 {
+        panic!("No rotors specified.\n --rotor ENCODING TURNOVER POSITION");
+    }
+
+    if message.is_none() {
+        panic!("No message specified.\n --message \"MESSAGE\"");
+    }
+
     let enigma = Enigma {
         rotors,
         reflector: Reflector::default(),
     };
+
     println!("Encoded: {}", enigma.encode(&message.unwrap()));
 }
 
