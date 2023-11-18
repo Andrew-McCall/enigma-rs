@@ -1,19 +1,25 @@
-use enigma_converts::ToEnigmaInt;
+use enigma::Enigma;
+use enigma_int::ToEnigmaInt;
+use reflector::Reflector;
+use rotor::Rotor;
 
-mod enigma_converts;
-mod enigma_encode;
-mod rotor_encode;
+mod enigma;
+mod enigma_int;
+mod reflector;
+mod rotor;
 
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
 
     println!("{:?}", args);
 
+    let mut decode = false;
+
     let mut rotors = Vec::new();
 
     let mut message = None;
 
-    let mut i = 0;
+    let mut i = 1;
     while i < args.len() {
         let current_argument = &args[i];
 
@@ -44,12 +50,21 @@ fn main() {
 
             message = Some(args[i + 1].to_string());
             i += 1
+        } else if current_argument == "-d" || current_argument == "--decode" {
+            decode = true;
+        } else {
+            panic!("Unknown argument: {}", current_argument);
         }
 
         i += 1;
     }
-    rotors.reverse();
-    let enigma = Enigma { rotors };
+    if !decode {
+        rotors.reverse();
+    }
+    let enigma = Enigma {
+        rotors,
+        reflector: Reflector::default(),
+    };
     println!("Encoded: {}", enigma.encode(&message.unwrap()));
 }
 
@@ -93,15 +108,4 @@ fn arg_to_rotor(encoding: &String, turnover: &String, position: &String) -> Resu
         turnover: turnover_index,
         position: position_index,
     })
-}
-
-#[derive(Debug)]
-struct Rotor {
-    wiring: Vec<usize>,
-    turnover: usize,
-    position: usize,
-}
-
-struct Enigma {
-    rotors: Vec<Rotor>,
 }
