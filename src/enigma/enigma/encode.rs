@@ -8,8 +8,8 @@ impl Enigma {
         let mut output = String::new();
 
         for c in message.chars() {
-            if c == ' ' {
-                output.push(' ');
+            if !c.is_ascii_alphabetic() {
+                output.push(c);
                 continue;
             }
 
