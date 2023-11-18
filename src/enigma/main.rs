@@ -11,8 +11,6 @@ mod rotor;
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
 
-    println!("{:?}", args);
-
     let mut decode = false;
 
     let mut rotors = Vec::new();
