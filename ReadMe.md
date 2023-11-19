@@ -124,4 +124,4 @@ Use `cargo run --release -- [flags]` to build and run the binary with one comman
 
 ## License
 MIT License
-Copywrite (c) 2023 Andrew McCall
+Copyright (c) 2023 Andrew McCall
