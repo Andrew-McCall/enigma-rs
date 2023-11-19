@@ -121,3 +121,7 @@ $ ./enigma [flags]
 The binary will be located in `target/release/enigma`.
 ### Cargo Run
 Use `cargo run --release -- [flags]` to build and run the binary with one command.
+
+## License
+MIT License
+Copywrite (c) 2023 Andrew McCall
