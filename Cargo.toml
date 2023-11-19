@@ -10,15 +10,8 @@ repository = "https://github.com/Andrew-McCall/Engima-rs"
 readme = "README.md"
 authors = ["Andrew McCall"]
 documentation = "https://github.com/Andrew-McCall/Engima-rs#readme"
-keywords = ["enigma", "machine", "simulator", "enigma-machine", "cryptography"]
-categories = [
-    "cryptography",
-    "simulator",
-    "enigma",
-    "machine",
-    "encryption",
-    "decryption",
-]
+keywords = ["enigma", "machine", "simulator", "cli", "cryptography"]
+categories = ["cryptography", "simulator", "enigma", "machine", "cli"]
 
 [dependencies]
 
