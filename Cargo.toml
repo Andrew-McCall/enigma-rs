@@ -2,7 +2,7 @@
 name = "Engima"
 version = "0.1.1"
 edition = "2021"
-default-run = "enigma-gui"
+default-run = "enigma-rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,5 +14,5 @@ name = "enigma"
 path = "src/enigma/main.rs"
 
 [[bin]]
-name = "enigma-gui"
-path = "src/enigma-gui/main.rs"
+name = "enigma-rs"
+path = "src/enigma-rs/main.rs"
