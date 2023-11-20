@@ -7,8 +7,6 @@ The enigma was an encryption machine used in and post WWII. It used physical rot
 ### My Implementation
 I have implemented the enigma machine as a command line tool using rust and standard library (std::env). My main goal was to create a command line interface to gain experience parsing arguments and flags to configure the encoding of the message. There are no other dependencies. 
 
-Enigma-rs will be a tool for storing and more easily setting the configuration of the enigma machine using my core library.
-
 ### Soruces
 - [Wikipedia 1 - Enigma Page](https://en.wikipedia.org/wiki/Enigma_machine)
 - [Wikipedia 2 - Rotors and Internals](https://en.wikipedia.org/wiki/Enigma_rotor_details)

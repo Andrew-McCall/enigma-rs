@@ -19,7 +19,3 @@ categories = ["cryptography", "simulator", "enigma", "machine", "cli"]
 [[bin]]
 name = "enigma"
 path = "src/enigma/main.rs"
-
-[[bin]]
-name = "enigma-rs"
-path = "src/enigma-rs/main.rs"
