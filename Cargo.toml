@@ -1,8 +1,7 @@
 [package]
 name = "Engima"
-version = "0.1.1"
+version = "0.2.1"
 edition = "2021"
-default-run = "enigma"
 license = "MIT"
 license-file = "LICENSE"
 description = "A simple Enigma machine simulator"
@@ -14,8 +13,3 @@ keywords = ["enigma", "machine", "simulator", "cli", "cryptography"]
 categories = ["cryptography", "simulator", "enigma", "machine", "cli"]
 
 [dependencies]
-
-
-[[bin]]
-name = "enigma"
-path = "src/enigma/main.rs"

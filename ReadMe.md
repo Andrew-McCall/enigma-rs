@@ -108,7 +108,7 @@ Clone the repo, build and run. (Cargo required)
 ```bash
 $ git clone https://GitHub.com/Andrew-McCall/enigma-rs.git
 $ cd enigma-rs
-$ cargo build --release
+$ cargo build
 ```
 
 ### Cargo Build
