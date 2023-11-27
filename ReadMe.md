@@ -93,7 +93,7 @@ Use `--state` to print the finial state of the enigma machine after encoding the
 ```
 
 ## Errors
-Able to parse any number of rotors. Each turnover and position must be valid also.
+I tried to make the error messages informative. I will not show them all here but this is an example:
 ```bash
 $ ./enigma wooooop -rotor abcdefghijklmnopqrstuvwxyz a y -rotor abc a a
 ["$", "wooooop", "-rotor", "abcdefghijklmnopqrstuvwxyz", "a", "y", "-rotor", "abc", "a", "a"]
