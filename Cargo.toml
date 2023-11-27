@@ -10,6 +10,12 @@ readme = "README.md"
 authors = ["Andrew McCall"]
 documentation = "https://github.com/Andrew-McCall/Engima-rs#readme"
 keywords = ["enigma", "machine", "simulator", "cli", "cryptography"]
-categories = ["cryptography", "simulator", "enigma", "machine", "cli"]
+categories = [
+    "cryptography",
+    "command-line-interface",
+    "mathematics",
+    "science",
+    "encoding",
+]
 
 [dependencies]
