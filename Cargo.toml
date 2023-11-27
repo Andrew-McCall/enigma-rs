@@ -1,10 +1,10 @@
 [package]
 name = "Engima"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 license = "MIT"
 license-file = "LICENSE"
-description = "A simple Enigma machine simulator"
+description = "A command line interface for an Enigma machine simulator. Configurable with any reflector, number of rotors, and plugboard pairs."
 repository = "https://github.com/Andrew-McCall/Engima-rs"
 readme = "README.md"
 authors = ["Andrew McCall"]
