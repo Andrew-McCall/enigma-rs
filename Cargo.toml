@@ -1,14 +1,13 @@
 [package]
-name = "Engima"
+name = "enigma"
 version = "0.2.3"
 edition = "2021"
 license = "MIT"
-license-file = "LICENSE"
-description = "A command line interface for an Enigma machine simulator. Configurable with any reflector, number of rotors, and plugboard pairs."
-repository = "https://github.com/Andrew-McCall/Engima-rs"
+description = "A command-line interface for an Enigma machine simulator. Configurable with any reflector, number of rotors, and plugboard pairs."
+repository = "https://github.com/Andrew-McCall/engima-rs"
 readme = "README.md"
 authors = ["Andrew McCall"]
-documentation = "https://github.com/Andrew-McCall/Engima-rs#readme"
+documentation = "https://github.com/Andrew-McCall/engima-rs#readme"
 keywords = ["enigma", "machine", "simulator", "cli", "cryptography"]
 categories = [
     "cryptography",
@@ -17,5 +16,9 @@ categories = [
     "science",
     "encoding",
 ]
+
+[lib]
+name = "enigma"
+path = "src/lib.rs"
 
 [dependencies]
