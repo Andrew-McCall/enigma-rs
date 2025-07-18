@@ -1,6 +1,6 @@
 [package]
 name = "enigma"
-version = "0.2.3"
+version = "1.0.0"
 edition = "2021"
 license = "MIT"
 description = "A command-line interface for an Enigma machine simulator. Configurable with any reflector, number of rotors, and plugboard pairs."
